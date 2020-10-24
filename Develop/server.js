@@ -20,12 +20,16 @@ app.use(express.static('public'));
 // Routes
 // =============================================================
 
-//Root 
+//Root index.html
 app.get("/", function(req, res) {
     console.log('I AM ROOT')
     res.sendFile(path.join(__dirname, "./public/index.html"));
   });
 
+//Route notes.html 
+app.get("/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "./public/notes.html"));
+    });
 
 
 
