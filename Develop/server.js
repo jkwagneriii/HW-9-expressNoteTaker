@@ -31,6 +31,13 @@ app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/notes.html"));
     });
 
+//Route db.json 
+app.get("/api/notes", function(req, res) {
+    fs.readFile('db.json', 'utf8', function(err, data) {
+        console.log(data);
+    })
+})
+
 
 
 
