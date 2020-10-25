@@ -2,6 +2,7 @@
 // =============================================================
 const express = require('express');
 const path = require('path');
+const fs = require('fs')
 
 // Sets up the Express App
 // =============================================================
@@ -31,12 +32,17 @@ app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/notes.html"));
     });
 
-//Route db.json 
+//Route db.json working with getNotes function
 app.get("/api/notes", function(req, res) {
-    fs.readFile('db.json', 'utf8', function(err, data) {
-        console.log(data);
+    fs.readFile('./db/db.json', 'utf8', function(err, data) {
+        if (err) {
+            console.log("Error");
+        } else {
+            console.log(data);
+            res.json(JSON.parse(data));
+        }
     })
-})
+});
 
 
 
