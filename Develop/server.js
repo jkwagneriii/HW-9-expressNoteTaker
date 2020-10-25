@@ -49,15 +49,42 @@ app.post("/api/notes", function(req, res) {
     fs.readFile('./db/db.json', 'utf8', function(err, data) {
         console.log("POST??", req.body);
 
-        let oldData = res.json(JSON.parse(data));
+        let oldData = JSON.parse(data);
+        req.body.id = oldData.length + 1;
+        oldData.push(req.body);
         
 
-    fs.writeFile('./db/db.json', JSON.stringify(oldData), function(err) {
-        console.log(err);
-        res.json(oldData);
-    })    
+        fs.writeFile('./db/db.json', JSON.stringify(oldData), function(err) {
+            console.log(err);
+            res.json(oldData);
+        })    
     })
 });
+
+// DELETE `/api/notes/:id` 
+app.delete("/api/notes/:id", function(req, res) {
+    fs.readFile('./db/db.json', 'utf8', function(err, data) {
+        console.log('this is the ID we wanna delete',req.params);
+        let oldData = JSON.parse(data);
+        console.log('OG data to delete something from', oldData)
+        // blank array 
+        var newData = []
+        // do a for loop and fill blank array up with the stuff want
+        for (let i = 0; i < oldData.length; i++) {
+           // console.log(oldData[i]);
+            if (parseInt(req.params.id) !== oldData[i].id) {
+                newData.push(oldData[i]);
+            }
+        }
+    console.log('new array !! minus dude we wanted to delete!!',newData);
+
+    fs.writeFile('./db/db.json', JSON.stringify(newData), function(err) {
+        console.log(err);
+        res.json(newData);
+    })
+
+    })
+})
 
 
 
