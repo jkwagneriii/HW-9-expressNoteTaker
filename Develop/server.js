@@ -48,8 +48,17 @@ app.get("/api/notes", function(req, res) {
 app.post("/api/notes", function(req, res) {
     fs.readFile('./db/db.json', 'utf8', function(err, data) {
         console.log("POST??", req.body);
+
+        let oldData = res.json(JSON.parse(data));
+        
+
+    fs.writeFile('./db/db.json', JSON.stringify(oldData), function(err) {
+        console.log(err);
+        res.json(oldData);
+    })    
     })
-})
+});
+
 
 
 
