@@ -44,6 +44,12 @@ app.get("/api/notes", function(req, res) {
     })
 });
 
+//Posting saved data from user input 
+app.post("/api/notes", function(req, res) {
+    fs.readFile('./db/db.json', 'utf8', function(err, data) {
+        console.log("POST??", req.body);
+    })
+})
 
 
 
