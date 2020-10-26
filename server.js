@@ -25,12 +25,12 @@ app.use(express.static('public'));
 app.get("/", function(req, res) {
     console.log('I AM ROOT')
     res.sendFile(path.join(__dirname, "./public/index.html"));
-  });
+});
 
 //Route notes.html 
 app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/notes.html"));
-    });
+});
 
 //Route db.json working with getNotes function
 app.get("/api/notes", function(req, res) {
@@ -82,9 +82,8 @@ app.delete("/api/notes/:id", function(req, res) {
         console.log(err);
         res.json(newData);
     })
-
     })
-})
+});
 
 
 
